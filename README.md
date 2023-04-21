@@ -1,4 +1,2 @@
-# projeto-sinf1
-# projeto-sinf1
+Ver git commands
 
-Primeiro Texto
