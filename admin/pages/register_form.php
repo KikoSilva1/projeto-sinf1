@@ -1,4 +1,3 @@
-<!--
 
 <?php
 
@@ -33,9 +32,7 @@ if(isset($_POST['submit'])){
 
 };
 
-
 ?>
--->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,15 +57,15 @@ if(isset($_POST['submit'])){
       <input type="password" name="password" required placeholder="Introduza a sua password">
       <input type="password" name="cpassword" required placeholder="Confirme a sua password">
       <select name="user_type">
-         <option value="user">Paciente</option>
-         <option value="admin">Doutor</option>
+         <option value="paciente">Paciente</option>
+         <option value="doutor">Doutor</option>
       </select>
       <input type="submit" name="submit" value="Criar Conta" class="form-btn">
       <p>Já tem uma conta?<a href="login_form.html"> Faça Login</a></p>
 
    </form>
 
-<!--
+
    <form action="" method="post">
       <h3>register now</h3>
       <?php
@@ -90,7 +87,7 @@ if(isset($_POST['submit'])){
       <p>already have an account? <a href="login_form.php">login now</a></p>
    </form>
 
--->
+
 
 
 
