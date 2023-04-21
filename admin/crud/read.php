@@ -2,12 +2,12 @@
 // Check existence of id parameter before processing further
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Include config file
-    require_once "config.php";
+    require_once "../backend/config.php";
     
     // Prepare a select statement
     
     //$sql = "SELECT * FROM employees WHERE id = ?";
-    $sql = "SELECT * FROM user_form WHERE id = ?";
+    $sql = "SELECT * FROM pacientes WHERE id = ?";
 
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
@@ -26,9 +26,9 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
                 // Retrieve individual field value
-                $name = $row["name"];
+                $name = $row["nome"];
                 $email = $row["email"];
-                $user_type = $row["user_type"];
+               
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: error.php");
@@ -56,7 +56,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Record</title>
+    <title>Dados do Paciente</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .wrapper{
@@ -70,20 +70,17 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mt-5 mb-3">View Record</h1>
+                    <h1 class="mt-5 mb-3">Dados do Paciente</h1>
                     <div class="form-group">
                         <label>Nome</label>
-                        <p><b><?php echo $row["name"]; ?></b></p>
+                        <p><b><?php echo $row["nome"]; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>email</label>
                         <p><b><?php echo $row["email"]; ?></b></p>
                     </div>
-                    <div class="form-group">
-                        <label>Tipo de Utilizador </label>
-                        <p><b><?php echo $row["user_type"]; ?></b></p>
-                    </div>
-                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
+
+                    <p><a href="listapacientes.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        
         </div>
