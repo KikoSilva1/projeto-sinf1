@@ -27,9 +27,22 @@ $query_run = mysqli_query($link, $query);
 
 if($query_run)
 {
+    $complete = true;
+    if(empty($idade) or empty($historial_familia_obesa) or empty($comida_calorica) or empty($alcool) or empty($food_between_meals) or empty($number_meals) or empty($water)or empty($activity)){
+        $complete = false;
+    }
+
+
+
+
+if($complete){
     $_SESSION['status'] =  $probability ."%";
     header("Location:  ../pages/obesidade.php");
-
+}
+else{
+    $_SESSION['status'] =  " Responda a todas as perguntas do questionário ";
+    header("Location:  ../pages/obesidade.php");
+}
     
 }
 else

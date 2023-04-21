@@ -64,13 +64,13 @@ if(isset($_POST['submit'])){
       <p>Ainda não têm uma conta? <a href="register_form.html">Criar Conta</a></p>
 
    </form>
-<!--
+
    <form action="" method="post">
       <h3>login now</h3>
       <?php
       if(isset($error)){
          foreach($error as $error){
-            echo '< <span class="error-msg">'.$error.'</span>'; >
+            echo '< <span class="error-msg">'.$error.'</span>'; 
          };
       };
       ?>
@@ -80,7 +80,7 @@ if(isset($_POST['submit'])){
       <p>don't have an account? <a href="register_form.php">register now</a></p>
    </form>
 
--->
+
 
 
 

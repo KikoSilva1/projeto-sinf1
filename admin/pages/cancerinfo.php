@@ -41,9 +41,9 @@
   <div class="w3-top">
     <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-      <a href="login_form.html" class="w3-bar-item w3-button w3-theme-l1">Login</a>
-      <a href="marcaçoes.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Marcações</a>
-      <a href="tablemedicos.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Médicos</a>
+      <a href="login_form.php" class="w3-bar-item w3-button w3-theme-l1">Login</a>
+      <a href="marcaçoes.php" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Marcações</a>
+      <a href="tablemedicos.php" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Médicos</a>
       <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
       <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>
     </div>
@@ -57,9 +57,9 @@
     <h4 class="w3-bar-item"><b>Menu</b></h4>
 
 
-    <a class="w3-bar-item w3-button w3-hover-black" href="perguntascancro.html">Ficha Anamnese</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="obesidade.html">Questionário: Risco de Obesidade</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="precario.html">Preçário</a>
+    <a class="w3-bar-item w3-button w3-hover-black" href="perguntascancro.php">Ficha Anamnese</a>
+    <a class="w3-bar-item w3-button w3-hover-black" href="obesidade.php">Questionário: Risco de Obesidade</a>
+    <a class="w3-bar-item w3-button w3-hover-black" href="precario.php">Preçário</a>
   </nav>
 
   <!-- Overlay effect when opening sidebar on small screens -->

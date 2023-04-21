@@ -34,7 +34,7 @@
                     </div>
                     <?php
                     // Include config file
-                    require_once "config.php";
+                    require_once "../backend/config.php";
                     
                     // Attempt select query execution
 
