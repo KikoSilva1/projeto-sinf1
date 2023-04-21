@@ -1,0 +1,15 @@
+Entidades:
+-Médico
+-Paciente 
+-Administrador da Plataforma(Implementamos métodos CRUD para gerir os pacientes e médicos e estará disponível na próxima iteração )
+
+Acerca do "Relatório: Risco de Obesidade" :
+
+Pensamos que seria interessante adicionar uma funcionalidade que permite ao utilizador prever o seu risco de obesidade
+através da resposta a 8 perguntas acerca de hábitos alimentares e estilo de vida, esta ferramenta tem por base um 
+modelo preditivo (Modelo de Regressão Logistica) feito de raiz pelo grupo.Para tal utilizamos a linguagem de analise de dados "R" e 
+contruimos o modelo apartir de um dataset proveniente de um estudo de uma universidade columbiana "Universidad De La Costa".
+Esta funcionalidade também estará disponível na próxima iteração.
+
+ 
+Acerca do Repositório: pretendemos utilizar nesta próxima iteração
