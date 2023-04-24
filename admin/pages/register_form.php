@@ -1,38 +1,75 @@
 
 <?php
+session_start();
+include("../backend/config.php");
 
-@include 'config.php';
+// check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
+  // get form data
+  $username = $_POST["username"];
+  $password = $_POST["password"];
+  $user_type = $_POST["user_type"];
+  $email =  $_POST["email"];
+  
+  // sanitize input data to prevent SQL injection
+  $username = mysqli_real_escape_string($link, $username);
+  $password = mysqli_real_escape_string($link, $password);
+  $user_type = mysqli_real_escape_string($link, $user_type);
+  
+  // validate form data
+  $errors = array();
+  if (empty($username)) {
+    $errors[] = "Username is required";
+  }
+  if (empty($password)) {
+    $errors[] = "Password is required";
+  }
+  if (empty($user_type)) {
+    $errors[] = "User type is required";
+  }
 
-if(isset($_POST['submit'])){
+  
 
-   $name = mysqli_real_escape_string($link, $_POST['name']);
-   $email = mysqli_real_escape_string($link, $_POST['email']);
-   $pass = md5($_POST['password']);
-   $cpass = md5($_POST['cpassword']);
-   $user_type = $_POST['user_type'];
+  // check if user already exists in the corresponding table
+  if ($user_type == "paciente") {
+    $sql = "SELECT * FROM pacientes WHERE nome = '$username'";
+  } elseif ($user_type == "medico") {
+    $sql = "SELECT * FROM medicos WHERE nome = '$username'";
+  }
+  $result = mysqli_query($link, $sql);
+  if (mysqli_num_rows($result) > 0) {
+   
+      $errors[] = "Username already exists";
+    }
+    else if($user_type == "paciente" and empty($errors)){
+      $sql = $sql = "INSERT INTO pacientes (nome, password, email) VALUES ('$username', '$password', '$email')";
+      $result = mysqli_query($link, $sql);
+      
+      $user_id = mysqli_insert_id($link); // get the user ID
+    }else if($user_type == "medico"and empty($errors)){
+      $sql = $sql = "INSERT INTO medicos (nome, password, email) VALUES ('$username', '$password', '$email')";
+      $result = mysqli_query($link, $sql);
+      $user_id = mysqli_insert_id($link);// get the user ID
+    }
 
-   $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
+ // if no errors, save the form data in the corresponding table    
+    // keep track of the user info in the session
+    $_SESSION["user_id"] = $user_id;
+    $_SESSION["username"] = $username;
+    $_SESSION["user_type"] = $user_type;
+    
+    if ($user_type == "paciente") {
+      header("Location: login_form.php");
+    } elseif ($user_type == "medico") {
+      header("Location: login_form.php");
+    }
+    exit();
 
-   $result = mysqli_query($link, $select);
-
-   if(mysqli_num_rows($result) > 0){
-
-      $error[] = 'user already exist!';
-
-   }else{
-
-      if($pass != $cpass){
-         $error[] = 'password not matched!';
-      }else{
-         $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
-         mysqli_query($link, $insert);
-         header('location:login_form.php');
-      }
-   }
-
-};
+  }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,22 +88,6 @@ if(isset($_POST['submit'])){
 <div class="form-container">
 
    <form action="" method="post">
-      <h3>Crie uma conta</h3>
-      <input type="text" name="name" required placeholder="Introduza o seu nome">
-      <input type="email" name="email" required placeholder="Introduza o seu email">
-      <input type="password" name="password" required placeholder="Introduza a sua password">
-      <input type="password" name="cpassword" required placeholder="Confirme a sua password">
-      <select name="user_type">
-         <option value="paciente">Paciente</option>
-         <option value="doutor">Doutor</option>
-      </select>
-      <input type="submit" name="submit" value="Criar Conta" class="form-btn">
-      <p>Já tem uma conta?<a href="login_form.html"> Faça Login</a></p>
-
-   </form>
-
-
-   <form action="" method="post">
       <h3>register now</h3>
       <?php
       if(isset($error)){
@@ -75,21 +96,17 @@ if(isset($_POST['submit'])){
          };
       };
       ?>
-      <input type="text" name="name" required placeholder="enter your name">
+      <input type="text" name="username" required placeholder="enter your name">
       <input type="email" name="email" required placeholder="enter your email">
       <input type="password" name="password" required placeholder="enter your password">
       <input type="password" name="cpassword" required placeholder="confirm your password">
       <select name="user_type">
-         <option value="user">user</option>
-         <option value="admin">admin</option>
+         <option value="paciente">Paciente</option>
+         <option value="medico">Médico</option>
       </select>
       <input type="submit" name="submit" value="register now" class="form-btn">
       <p>already have an account? <a href="login_form.php">login now</a></p>
    </form>
-
-
-
-
 
 
 </div>

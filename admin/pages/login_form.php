@@ -1,33 +1,41 @@
 <?php
 
-@include 'config.php';
+@include '../backend/config.php';
 
 session_start();
 
 if(isset($_POST['submit'])){
 
-   $name = mysqli_real_escape_string($link, $_POST['name']);
+  
    $email = mysqli_real_escape_string($link, $_POST['email']);
-   $pass = md5($_POST['password']);
-   $cpass = md5($_POST['cpassword']);
-   $user_type = $_POST['user_type'];
+   $pass = $_POST['password'];
+   
+   $selectmedico = " SELECT * FROM medicos WHERE email = '$email' && password = '$pass' ";
+   $selectpaciente = " SELECT * FROM pacientes WHERE email = '$email' && password = '$pass' ";
 
-   $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
+   $resultmedico = mysqli_query($link, $selectmedico);
+   $resultpaciente = mysqli_query($link, $selectpaciente);
 
-   $result = mysqli_query($link, $select);
+   if(mysqli_num_rows($resultmedico) + mysqli_num_rows($resultpaciente)> 0){
 
-   if(mysqli_num_rows($result) > 0){
+      if(mysqli_num_rows($resultmedico)>0){
 
-      $row = mysqli_fetch_array($result);
+         $user_data = mysqli_fetch_assoc($resultmedico);
+         $_SESSION['user_id'] = $user_data['id'];
+         $_SESSION['user_type'] = 'medico';
+         $_SESSION['user_email'] = $user_data['email'];
+         $_SESSION['user_name'] = $user_data['name'];
+         
+         header('location:dashboardmedico.php');
 
-      if($row['user_type'] == 'admin'){
+      }else{
 
-         $_SESSION['admin_name'] = $row['name'];
-         header('location:mainpage.php');
-
-      }elseif($row['user_type'] == 'user'){
-
-         $_SESSION['user_name'] = $row['name'];
+         $user_data = mysqli_fetch_assoc($resultpaciente);
+         $_SESSION['user_id'] = $user_data['id'];
+         $_SESSION['user_type'] = 'paciente';
+         $_SESSION['user_email'] = $user_data['email'];
+         $_SESSION['user_name'] = $user_data['name'];
+         
          header('location:cancerinfo.php');
 
       }
@@ -57,15 +65,6 @@ if(isset($_POST['submit'])){
 <div class="form-container">
 
    <form action="" method="post">
-      <h3>Faça Login</h3>
-      <input type="email" name="email" required placeholder="Introduza o seu email">
-      <input type="password" name="password" required placeholder="Introduza a sua password">
-      <input type="submit" name="submit" value="Login" class="form-btn">
-      <p>Ainda não têm uma conta? <a href="register_form.html">Criar Conta</a></p>
-
-   </form>
-
-   <form action="" method="post">
       <h3>login now</h3>
       <?php
       if(isset($error)){
@@ -79,10 +78,6 @@ if(isset($_POST['submit'])){
       <input type="submit" name="submit" value="login now" class="form-btn">
       <p>don't have an account? <a href="register_form.php">register now</a></p>
    </form>
-
-
-
-
 
 </div>
 
