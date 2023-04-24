@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
          $_SESSION['user_id'] = $user_data['id'];
          $_SESSION['user_type'] = 'medico';
          $_SESSION['user_email'] = $user_data['email'];
-         $_SESSION['user_name'] = $user_data['name'];
+         $_SESSION['user_name'] = $user_data['nome'];
          
          header('location:dashboardmedico.php');
 
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
          $_SESSION['user_id'] = $user_data['id'];
          $_SESSION['user_type'] = 'paciente';
          $_SESSION['user_email'] = $user_data['email'];
-         $_SESSION['user_name'] = $user_data['name'];
+         $_SESSION['user_name'] = $user_data['nome'];
          
          header('location:cancerinfo.php');
 

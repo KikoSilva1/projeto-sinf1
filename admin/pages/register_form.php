@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+
 include("../backend/config.php");
 
 // check if the form is submitted
@@ -53,17 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $user_id = mysqli_insert_id($link);// get the user ID
     }
 
- // if no errors, save the form data in the corresponding table    
-    // keep track of the user info in the session
-    $_SESSION["user_id"] = $user_id;
-    $_SESSION["username"] = $username;
-    $_SESSION["user_type"] = $user_type;
+ 
     
-    if ($user_type == "paciente") {
       header("Location: login_form.php");
-    } elseif ($user_type == "medico") {
-      header("Location: login_form.php");
-    }
+    
     exit();
 
   }
