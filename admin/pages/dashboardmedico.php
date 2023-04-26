@@ -65,7 +65,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
 
     <div class="w3-quarter ">
-    <a href="index.php" class="w3-button  w3-block"> 
+    <a href="../crud/listapacientes.php" class="w3-button  w3-block"> 
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
         <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
         <div class="w3-right">

@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
-                        <h2 class="pull-left">Pacientes</h2>
+                        <h2 class="pull-left">Consultas</h2>
                         <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Employee</a>
                     </div>
                     <?php
@@ -40,24 +40,29 @@
                     session_start();
                      $id_medico =  $_SESSION['user_id'] ;
                    
-                      $sql = "SELECT * FROM pacientes WHERE id_medico = $id_medico ";
+                      $sql = "SELECT * FROM consultas WHERE id_medico = $id_medico ";
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th>#</th>";
-                                        echo "<th>Nome</th>";
-                                        echo "<th>Email</th>";
+                                        echo "<th>Paciente</th>";
+                                        echo "<th>Data</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
                                 while($row = mysqli_fetch_array($result)){
+                                    $id_paciente= $row['id_paciente'];
+                                    $sql_paciente = "SELECT * FROM pacientes WHERE id = $id_paciente ";
+                                    $result_paciente = mysqli_query($link, $sql_paciente);
+                                    $row_paciente=mysqli_fetch_array($result_paciente);
+                                    $nome_paciente=$row_paciente['nome'];
                                     echo "<tr>";
-                                        echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['nome'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
+                                        echo "<td>" . $row['id_paciente'] . "</td>";
+                                        echo "<td>" . $nome_paciente. "</td>";
+                                        echo "<td>" . $row['data'] ."</td>";
                                         echo "<td>";
                                             echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                             echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
@@ -85,3 +90,4 @@
     </div>
 </body>
 </html>
+
