@@ -16,6 +16,19 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <body class="w3-light-grey">
 
 
+<?php 
+    @include '../backend/config.php';
+    session_start();
+    $id_medico = $_SESSION['user_id'];
+    $sql_consultas = "SELECT * FROM consultas WHERE id_medico = $id_medico"; 
+    $result_consultas = mysqli_query($link, $sql_consultas);
+    $number_consultas = mysqli_num_rows($result_consultas); 
+
+    $sql_pacientes = "SELECT * FROM pacientes WHERE id_medico = $id_medico"; 
+    $result_pacientes = mysqli_query($link, $sql_pacientes);
+    $number_pacientes = mysqli_num_rows($result_pacientes); 
+?>
+
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:50px;margin-top:43px; w3-margin-bottom">
 
@@ -39,11 +52,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
 
     <div class="w3-quarter">
-    <a href="index.php" class="w3-button w3-block"> 
+    <a href="listaconsultas.php" class="w3-button w3-block"> 
       <div class="w3-container w3-blue w3-padding-16">
         <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>99</h3>
+          <h3> <?php echo $number_consultas ?> </h3>  
         </div>
         <div class="w3-clear"></div>
         <h4>Consultas</h4>
@@ -69,7 +82,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-container w3-orange w3-text-white w3-padding-16">
         <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
         <div class="w3-right">
-          <h3>  5 </h3>
+          <h3> <?php echo $number_pacientes ?></h3>
         </div>
         <div class="w3-clear"></div>
         <h4>Pacientes</h4>
