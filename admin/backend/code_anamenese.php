@@ -19,10 +19,12 @@
 
 $complete = true;
      
-    if(empty($pergunta1) or empty($pergunta1) or empty($pergunta2) or empty($pergunta3) or empty($pergunta4) or empty($pergunta5) or empty($pergunta6)){
+    //if(empty($pergunta1) or empty($pergunta1) or empty($pergunta2) or empty($pergunta3) or empty($pergunta4) or empty($pergunta5) or empty($pergunta6)){
+    //    $complete = false;
+    //}
+    if ($pergunta1 === "" || $pergunta2 === "" || $pergunta3 === "" || $pergunta4 === "" || $pergunta5 === "" || $pergunta6 === "") {
         $complete = false;
     }
-
 
 
 
